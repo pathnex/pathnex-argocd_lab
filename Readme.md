@@ -93,3 +93,9 @@ NAMESPACE      NAME                                      TYPE           CLUSTER-
 argocd         argocd-server                             LoadBalancer   172.20.233.130   a15e3a35b978f4cd4bcb080971df360e-523335367.ap-south-1.elb.amazonaws.com    80:31412/TCP,443:32045/TCP   10m                                                               443/TCP                      4h7m
 monitoring     pathnex-grafana-service                   LoadBalancer   172.20.95.153    aa32e4bf413644023a0e7630754be889-1022658738.ap-south-1.elb.amazonaws.com   80:31011/TCP                 6m56s
 pathnex        pathnex-nginx-service                     LoadBalancer   172.20.156.215   a85c1db8575934cf782e2e0ba1eef0aa-1472485196.ap-south-1.elb.amazonaws.com   80:31425/TCP                 14m
+
+# After completion, To delete the namespace and its resources 
+kubectl delete namespace monitoring pathnex argocd
+
+
+# Note: Don't forget to delete the EKS cluster after the lab.
