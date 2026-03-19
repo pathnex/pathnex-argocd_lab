@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pathnex-grafana
+  labels:
+    app: pathnex-grafana
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: pathnex-grafana
+  template:
+    metadata:
+      labels:
+        app: pathnex-grafana
+    spec:
+      containers:
+        - name: pathnex-grafana
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              value: "{{ .Values.adminUser }}"
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: "{{ .Values.adminPassword }}"

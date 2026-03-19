@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: grafana/grafana
+  tag: "9.0.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 3000
+  name: pathnex-grafana-service
+
+adminUser: admin
+adminPassword: admin123   # change this in production
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
