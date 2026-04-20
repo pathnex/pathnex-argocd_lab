@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/pathnex/ArgoCd_lab.git'
+    repoURL: 'https://github.com/pathnex/pathnex-argocd_lab.git'
     targetRevision: main
     path: nginx
     helm:
@@ -15,7 +15,6 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: pathnex
-    createNamespace: true 
   syncPolicy:
     automated:
       prune: true
