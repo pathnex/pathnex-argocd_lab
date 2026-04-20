@@ -94,7 +94,8 @@ argocd         argocd-server                             LoadBalancer   172.20.2
 monitoring     pathnex-grafana-service                   LoadBalancer   172.20.95.153    aa32e4bf413644023a0e7630754be889-1022658738.ap-south-1.elb.amazonaws.com   80:31011/TCP                 6m56s
 pathnex        pathnex-nginx-service                     LoadBalancer   172.20.156.215   a85c1db8575934cf782e2e0ba1eef0aa-1472485196.ap-south-1.elb.amazonaws.com   80:31425/TCP                 14m
 
-# To force sync after making a change.
+
+#  Only If Needed, Run below command to force sync the ArgoCD after making a change.
 kunectl patch application pathnex-nginx -n argocd   --type merge   -p '{"operation":{"sync":{}}}'
 
 # After completion, To delete the namespace and its resources 

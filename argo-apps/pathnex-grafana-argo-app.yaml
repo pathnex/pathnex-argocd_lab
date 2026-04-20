@@ -14,7 +14,7 @@ spec:
         - values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: monitoring
+    namespace: pathnex-grafana-monitoring
   syncPolicy:
     automated:
       prune: true
