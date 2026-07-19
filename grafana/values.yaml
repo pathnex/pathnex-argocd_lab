@@ -1,4 +1,4 @@
-replicaCount: 5
+replicaCount: 15
 
 image:
   repository: grafana/grafana
