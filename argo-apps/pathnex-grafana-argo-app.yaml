@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/pathnex/pathnex-argocd_lab.git'
-    targetRevision: pathnex-july-batch
+    targetRevision: main
     path: grafana
     helm:
       valueFiles:
