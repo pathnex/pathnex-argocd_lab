@@ -6,7 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer        # Exposing Nginx to the internet
+  type: NodePort        # Exposing Nginx to the internet
   port: 80                  # External port exposed by the service
   targetPort: 80            # The port Nginx is running on inside the container
   name: pathnex-nginx-service
