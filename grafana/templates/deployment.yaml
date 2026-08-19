@@ -18,10 +18,21 @@ spec:
         - name: pathnex-grafana
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
           ports:
             - containerPort: {{ .Values.service.targetPort }}
+
           env:
             - name: GF_SECURITY_ADMIN_USER
               value: "{{ .Values.adminUser }}"
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: "{{ .Values.adminPassword }}"
+
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: pathnex-grafana-pvc
