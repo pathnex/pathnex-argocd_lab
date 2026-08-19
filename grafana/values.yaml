@@ -10,3 +10,8 @@ service:
   name: pathnex-grafana-service
   port: 80                    # External port exposed by the service
   targetPort: 3000            # The port Grafana is running on inside the container
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: standard
