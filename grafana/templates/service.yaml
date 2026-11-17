@@ -1,14 +1,19 @@
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.name }}   # Grafana service name
+  name: {{ .Values.service.name }}
   labels:
-    app: pathnex-grafana            # App label for selection
+    app: pathnex-grafana
+
 spec:
-  type: {{ .Values.service.type }}   # This should be LoadBalancer for external access
+  type: {{ .Values.service.type }}
+
   selector:
-    app: pathnex-grafana            # Selector to match the Grafana pods
+    app: pathnex-grafana
+
   ports:
-    - port: {{ .Values.service.port }}         # External port exposed
-      targetPort: {{ .Values.service.targetPort }} # Internal container port
-      protocol: TCP                  # Protocol used by Grafana
+    - name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP

@@ -1,17 +1,14 @@
-replicaCount: 3
-
-image:
-  repository: grafana/grafana
-  tag: 10.0.0
-  pullPolicy: IfNotPresent
-
-service:
-  type: NodePort          # Exposing Grafana to the internet
-  name: pathnex-grafana-service
-  port: 80                    # External port exposed by the service
-  targetPort: 3000            # The port Grafana is running on inside the container
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
 
 persistence:
   enabled: true
   size: 10Gi
   storageClass: gp2
+  accessModes:
+    - ReadWriteOnce

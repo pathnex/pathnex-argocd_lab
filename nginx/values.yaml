@@ -1,17 +1,20 @@
 replicaCount: 1
-
 image:
   repository: nginx
   tag: "1.25"
   pullPolicy: IfNotPresent
-
 service:
-  type: NodePort        # Exposing Nginx to the internet
-  port: 80                  # External port exposed by the service
-  targetPort: 80            # The port Nginx is running on inside the container
+  type: NodePort
+  port: 80
+  targetPort: 80
   name: pathnex-nginx-service
-
-resources: {}
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
 nodeSelector: {}
 tolerations: []
 affinity: {}
