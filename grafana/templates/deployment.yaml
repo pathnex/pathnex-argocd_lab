@@ -1,9 +1,11 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pathnex-grafana
   labels:
     app: pathnex-grafana
+
 spec:
   replicas: {{ .Values.replicaCount }}
 
@@ -26,20 +28,49 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           ports:
-            - containerPort: {{ .Values.service.targetPort }}
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
 
           env:
             - name: GF_SECURITY_ADMIN_USER
-              value: "{{ .Values.adminUser }}"
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin
+                  key: admin-user
 
             - name: GF_SECURITY_ADMIN_PASSWORD
-              value: "{{ .Values.adminPassword }}"
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-admin
+                  key: admin-password
 
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: grafana-storage
               mountPath: /var/lib/grafana
+          {{- end }}
 
+      {{- if .Values.persistence.enabled }}
       volumes:
         - name: grafana-storage
           persistentVolumeClaim:
             claimName: pathnex-grafana-pvc
+      {{- end }}
